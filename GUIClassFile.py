@@ -20,10 +20,9 @@ class GuiClass:
         root.mainloop()
 
     def first_page(self):
-
         # REGISTER NEW SUBFUNC
-        def sub_func_register(root):
-            child = tk.Toplevel(root)
+        def sub_func_register():
+            child = tk.Toplevel(self.root)
 
             name = tk.Label(child, text="Name: ")
             name_entry = tk.Entry(child)
@@ -37,32 +36,49 @@ class GuiClass:
             password = tk.Label(child, text="Password: ")
             password_entry = tk.Entry(child)
 
-            register_button = tk.Button(self.root, text="REGISTER", command= self.first_page)
+            register_button = tk.Button(child, text="REGISTER", command=first_page)
 
-            name.grid()
-            name_entry.grid()
-            email.grid()
-            email_entry.grid()
-            username.grid()
-            username_entry.grid()
-            password.grid()
-            password_entry.grid()
-            login_button.grid()
-            register_button.grid()
+            name.grid(row=0, column=0)
+            name_entry.grid(row=0, column=1)
+            email.grid(row=1, column=0)
+            email_entry.grid(row=1, column=1)
+            username.grid(row=2, column=0)
+            username_entry.grid(row=2, column=1)
+            password.grid(row=3, column=0)
+            password_entry.grid(row=3, column=1)
+            register_button.grid(row=4, column=0)
 
-        username = tk.Label(self.root, text="Username: ")
-        username_entry = tk.Entry(self.root)
+        def login_and_register():
+            new_root = tk.Tk()
 
-        password = tk.Label(self.root, text="Password: ")
-        password_entry = tk.Entry(self.root)
+            username = tk.Label(new_root, text="Username: ")
+            username_entry = tk.Entry(new_root)
 
-        login_button = tk.Button(self.root, text="LOGIN")   #denna ska trigga chattfönstret
+            password = tk.Label(new_root, text="Password: ")
+            password_entry = tk.Entry(new_root)
 
-        register_button = tk.Button(self.root, text="REGISTER NEW", command = lambda: sub_func_register(self.root))
+            login_button = tk.Button(new_root, text="LOGIN", command=self.chatWindow)
 
-        username.grid()
-        username_entry.grid()
-        password.grid()
-        password_entry.grid()
-        login_button.grid()
-        register_button.grid()
+            register_button = tk.Button(new_root, text="REGISTER NEW", command=sub_func_register)
+
+            username.grid(row=0, column=0)
+            username_entry.grid(row=0, column=1)
+            password.grid(row=1, column=0)
+            password_entry.grid(row=1, column=1)
+            login_button.grid(row=2, column=0)
+            register_button.grid(row=3, column=0)
+
+        # IP AND PORT
+        ip = tk.Label(self.root, text="IP: ")
+        ip_entry = tk.Entry(self.root)
+
+        port = tk.Label(self.root, text="Port: ")
+        port_entry = tk.Entry(self.root)
+
+        enter_button = tk.Button(self.root, text="ENTER", command=login_and_register)
+
+        ip.grid(row=0, column=0)
+        ip_entry.grid(row=0, column=1)
+        port.grid(row=1, column=0)
+        port_entry.grid(row=1, column=1)
+        enter_button.grid(row=2, column=0)
