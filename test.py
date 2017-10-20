@@ -4,3 +4,5 @@ socket
 
 print("hejedj")
 import _thread
+
+hej
