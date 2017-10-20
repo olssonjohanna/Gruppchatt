@@ -7,8 +7,10 @@ class GuiClass:
         self.first_page()
         self.root.mainloop()
 
-    def chatWindow(self):
+    def chatWindow(self, new_root):
         root = tk.Tk()
+        new_root.destroy()
+
         root.geometry('{}x{}'.format(600, 400))
         tk.Label(text="one").pack()
         windowFrame = tk.Frame(height=2, bd=1, relief=tk.SUNKEN)
@@ -22,7 +24,7 @@ class GuiClass:
     def first_page(self):
 
         #SUBFUNC TO REGISTER NEW
-        def sub_func_register(root):
+        def sub_func_register(root, login):
             child = tk.Toplevel(root)
 
             welcome_register = tk.Label(child, text="REGISTER NEW USER")
@@ -39,7 +41,7 @@ class GuiClass:
             password = tk.Label(child, text="Password: ")
             password_entry = tk.Entry(child)
 
-            register_button = tk.Button(child, text="REGISTER", command= self.first_page)
+            register_button = tk.Button(child, text="REGISTER", command= login)
 
             welcome_register.grid(row=0, column=0)
             name.grid(row=1, column=0)
@@ -55,7 +57,7 @@ class GuiClass:
         #SECOND WINDOW: LOGIN AND REGISTER
         def login_and_register():
             new_root = tk.Tk()
-            self.root.destroy()
+            #self.root.destroy() TEST TRY EXCEPT HÄR ?!
 
             username = tk.Label(new_root, text="Username: ")
             username_entry = tk.Entry(new_root)
@@ -63,9 +65,9 @@ class GuiClass:
             password = tk.Label(new_root, text="Password: ")
             password_entry = tk.Entry(new_root)
 
-            login_button = tk.Button(new_root, text="LOGIN", command=self.chatWindow)
+            login_button = tk.Button(new_root, text="LOGIN", command= lambda: self.chatWindow(new_root))
 
-            register_button = tk.Button(new_root, text="REGISTER NEW USER", command= lambda: sub_func_register(new_root))
+            register_button = tk.Button(new_root, text="REGISTER NEW USER", command= lambda: sub_func_register(new_root, login_and_register))
 
             username.grid(row=0, column=0)
             username_entry.grid(row=0, column=1)
@@ -81,7 +83,7 @@ class GuiClass:
         port = tk.Label(self.root, text="Port: ")
         port_entry = tk.Entry(self.root)
 
-        enter_button = tk.Button(self.root, text="ENTER", command=login_and_register)
+        enter_button = tk.Button(self.root, text="ENTER", command= login_and_register)
 
         ip.grid(row=0, column=0)
         ip_entry.grid(row=0, column=1)
