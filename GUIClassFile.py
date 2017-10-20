@@ -22,8 +22,8 @@ class GuiClass:
     def first_page(self):
 
         #SUBFUNC TO REGISTER NEW
-        def sub_func_register():
-            child = tk.Toplevel(self.new_root)
+        def sub_func_register(root):
+            child = tk.Toplevel(root)
 
             welcome_register = tk.Label(child, text="REGISTER NEW USER")
 
@@ -65,14 +65,14 @@ class GuiClass:
 
             login_button = tk.Button(new_root, text="LOGIN", command=self.chatWindow)
 
-            register_button = tk.Button(new_root, text="REGISTER NEW USER", command=sub_func_register)
+            register_button = tk.Button(new_root, text="REGISTER NEW USER", command= lambda: sub_func_register(new_root))
 
             username.grid(row=0, column=0)
             username_entry.grid(row=0, column=1)
             password.grid(row=1, column=0)
             password_entry.grid(row=1, column=1)
             login_button.grid(row=2, column=0)
-            register_button.grid(row=3, column=0)
+            register_button.grid(row=2, column=1)
 
         #FIRST PAGE: IP AND PORT
         ip = tk.Label(self.root, text="IP: ")
