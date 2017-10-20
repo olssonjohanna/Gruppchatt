@@ -7,7 +7,7 @@ class GuiClass:
         self.first_page()
         self.root.mainloop()
 
-    def chatWindow():
+    def chatWindow(self):
         root = tk.Tk()
         root.geometry('{}x{}'.format(600, 400))
         tk.Label(text="one").pack()
@@ -20,9 +20,12 @@ class GuiClass:
         root.mainloop()
 
     def first_page(self):
-        # REGISTER NEW SUBFUNC
+
+        #SUBFUNC TO REGISTER NEW
         def sub_func_register():
-            child = tk.Toplevel(self.root)
+            child = tk.Toplevel(self.new_root)
+
+            welcome_register = tk.Label(child, text="REGISTER NEW USER")
 
             name = tk.Label(child, text="Name: ")
             name_entry = tk.Entry(child)
@@ -36,20 +39,23 @@ class GuiClass:
             password = tk.Label(child, text="Password: ")
             password_entry = tk.Entry(child)
 
-            register_button = tk.Button(child, text="REGISTER", command=first_page)
+            register_button = tk.Button(child, text="REGISTER", command= self.first_page)
 
-            name.grid(row=0, column=0)
-            name_entry.grid(row=0, column=1)
-            email.grid(row=1, column=0)
-            email_entry.grid(row=1, column=1)
-            username.grid(row=2, column=0)
-            username_entry.grid(row=2, column=1)
-            password.grid(row=3, column=0)
-            password_entry.grid(row=3, column=1)
-            register_button.grid(row=4, column=0)
+            welcome_register.grid(row=0, column=0)
+            name.grid(row=1, column=0)
+            name_entry.grid(row=1, column=1)
+            email.grid(row=2, column=0)
+            email_entry.grid(row=2, column=1)
+            username.grid(row=3, column=0)
+            username_entry.grid(row=3, column=1)
+            password.grid(row=4, column=0)
+            password_entry.grid(row=4, column=1)
+            register_button.grid(row=5, column=0)
 
+        #SECOND WINDOW: LOGIN AND REGISTER
         def login_and_register():
             new_root = tk.Tk()
+            self.root.destroy()
 
             username = tk.Label(new_root, text="Username: ")
             username_entry = tk.Entry(new_root)
@@ -59,7 +65,7 @@ class GuiClass:
 
             login_button = tk.Button(new_root, text="LOGIN", command=self.chatWindow)
 
-            register_button = tk.Button(new_root, text="REGISTER NEW", command=sub_func_register)
+            register_button = tk.Button(new_root, text="REGISTER NEW USER", command=sub_func_register)
 
             username.grid(row=0, column=0)
             username_entry.grid(row=0, column=1)
@@ -68,7 +74,7 @@ class GuiClass:
             login_button.grid(row=2, column=0)
             register_button.grid(row=3, column=0)
 
-        # IP AND PORT
+        #FIRST PAGE: IP AND PORT
         ip = tk.Label(self.root, text="IP: ")
         ip_entry = tk.Entry(self.root)
 
