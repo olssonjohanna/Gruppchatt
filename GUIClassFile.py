@@ -1,5 +1,7 @@
 import tkinter as tk
 from threading import Thread
+import GUIFunctions
+
 class GuiClass:
 
     def __init__(self):
@@ -82,35 +84,40 @@ class GuiClass:
             register_button.grid(row=5, column=0)
 
         #SECOND WINDOW: LOGIN AND REGISTER
-        def login_and_register():
+        def login_and_register(self):
             new_root = tk.Tk()
-            #self.root.destroy() TEST TRY EXCEPT HÄR ?!
 
-            username = tk.Label(new_root, text="Username: ")
-            username_entry = tk.Entry(new_root)
+            try:
+                self.root.destroy()
 
-            password = tk.Label(new_root, text="Password: ")
-            password_entry = tk.Entry(new_root)
+            except:
+                username = tk.Label(new_root, text="Username: ")
+                username_entry = tk.Entry(new_root)
 
-            login_button = tk.Button(new_root, text="LOGIN", command= lambda: self.chatWindow(new_root))
+                password = tk.Label(new_root, text="Password: ")
+                password_entry = tk.Entry(new_root)
 
-            register_button = tk.Button(new_root, text="REGISTER NEW USER", command= lambda: sub_func_register(new_root, login_and_register))
+                login_button = tk.Button(new_root, text="LOGIN", command= lambda: self.chatWindow(new_root))
 
-            username.grid(row=0, column=0)
-            username_entry.grid(row=0, column=1)
-            password.grid(row=1, column=0)
-            password_entry.grid(row=1, column=1)
-            login_button.grid(row=2, column=0)
-            register_button.grid(row=2, column=1)
+                register_button = tk.Button(new_root, text="REGISTER NEW USER", command= lambda: sub_func_register(new_root, login_and_register))
+
+                username.grid(row=0, column=0)
+                username_entry.grid(row=0, column=1)
+                password.grid(row=1, column=0)
+                password_entry.grid(row=1, column=1)
+                login_button.grid(row=2, column=0)
+                register_button.grid(row=2, column=1)
 
         #FIRST PAGE: IP AND PORT
         ip = tk.Label(self.root, text="IP: ")
         ip_entry = tk.Entry(self.root)
+        get_IP = ip_entry.get()
 
         port = tk.Label(self.root, text="Port: ")
         port_entry = tk.Entry(self.root)
+        get_port = port_entry.get()
 
-        enter_button = tk.Button(self.root, text="ENTER", command= login_and_register)
+        enter_button = tk.Button(self.root, text="ENTER", command= lambda: GUIFunctions.IP_and_port(get_IP, get_port))
 
         ip.grid(row=0, column=0)
         ip_entry.grid(row=0, column=1)
