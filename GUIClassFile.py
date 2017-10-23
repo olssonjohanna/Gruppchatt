@@ -1,14 +1,17 @@
 import tkinter as tk
-
+from threading import Thread
 class GuiClass:
 
     def __init__(self):
-        self.chatWindow()
+        self.root = tk.Tk()
+        self.first_page()
+        self.root.mainloop()
 
     def updateChat(self,text):
         self.windowText.config(state=tk.NORMAL)
         self.windowText.insert(tk.END,text+"\n")
         self.windowText.config(state=tk.DISABLED)
+        self.windowText.see(tk.END)
 
     def retrieve_input(self):
         input = self.chatText.get('1.0', tk.END)
