@@ -3,13 +3,14 @@ import os
 from ClientRecieve import Recieve_message
 from ClientSend import Send_message
 
-client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+#client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 
 def create_Connections(my_ip, my_port):
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect((my_ip,my_port))
-    threadsend()
+    threadsend(client_socket)
 
-def threadsend():
+def threadsend(client_socket):
 
     thread_send = Recieve_message(client_socket)
     thread_send.start()
