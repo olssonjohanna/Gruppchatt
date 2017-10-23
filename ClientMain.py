@@ -8,7 +8,6 @@ from ClientSend import Send_message
 def create_Connections(my_ip, my_port):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect((my_ip,my_port))
-
     #threadsend(client_socket)
 
 #######Thread skapas för inkommande samt skikade medelanden#######

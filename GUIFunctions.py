@@ -6,13 +6,16 @@ def IP_and_port(get_ip, get_port):
 
 # kommer från REGISTER knappen: spara användaren på en fil sen till login på GUIClassFile
 def register(name_entry,email_entry,username_entry,password_entry):
-    file = open("RegisterdUsersLog.txt", "w")
+
+    file = open("users.txt", "w")
 
     file.write(name_entry+ "\n")
     file.write(email_entry+ "\n")
     file.write(username_entry+ "\n")
     file.write(password_entry+ "\n")
     file.write("\n")
+
+
 
     file.close()
 
@@ -22,8 +25,7 @@ def register(name_entry,email_entry,username_entry,password_entry):
 def login(username_entry,password_entry):
     file = open("RegisterdUserLog.txt", "r")
 
-    if username_entry == file.read():
-
+    #if username_entry == file.read()
 
         #jämnföra user och pass med filen
 
