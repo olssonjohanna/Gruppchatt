@@ -23,7 +23,7 @@ def login(username_entry,password_entry):
     file = open("RegisterdUserLog.txt", "r")
 
     if username_entry == file.read():
-        pass
+
 
         #jämnföra user och pass med filen
 

@@ -49,7 +49,7 @@ class GuiClass:
 
         root.mainloop()
 
-    def first_page(self):
+    def login_and_register(self):
 
         #SUBFUNC TO REGISTER NEW
         def sub_func_register(root, login):
@@ -69,7 +69,7 @@ class GuiClass:
             password = tk.Label(child, text="Password: ")
             password_entry = tk.Entry(child)
 
-            register_button = tk.Button(child, text="REGISTER", command= login)
+            register_button = tk.Button(child, text="REGISTER", command= GUIFunctions.register(name_entry.get(), email_entry.get(), username_entry.get(), password_entry.get()))
 
             welcome_register.grid(row=0, column=0)
             name.grid(row=1, column=0)
@@ -107,7 +107,6 @@ class GuiClass:
         register_button.grid(row=2, column=1)
 
     def first_page(self):
-        #FIRST PAGE: IP AND PORT
         ip = tk.Label(self.root, text="IP: ")
         ip_entry = tk.Entry(self.root)
 
@@ -117,11 +116,13 @@ class GuiClass:
         ip_var = ""
 
         def getValue(ip,port,entry1,entry2):
+
          try:
             ip = entry1.get()
             port = int(entry2.get())
             GUIFunctions.create_Connections(ip,port)
             self.login_and_register()
+
          except ValueError:
              tkinter.messagebox.showinfo("Error","Port should be a number")
              return False
