@@ -1,7 +1,6 @@
 import tkinter as tk
-from threading import Thread
 import GUIFunctions
-
+from threading import Thread
 class GuiClass:
 
     def __init__(self):
@@ -86,6 +85,7 @@ class GuiClass:
         #SECOND WINDOW: LOGIN AND REGISTER
         def login_and_register(self):
             new_root = tk.Tk()
+            #self.root.destroy() TEST TRY EXCEPT HÄR ?!
 
             try:
                 self.root.destroy()
@@ -111,14 +111,18 @@ class GuiClass:
         #FIRST PAGE: IP AND PORT
         ip = tk.Label(self.root, text="IP: ")
         ip_entry = tk.Entry(self.root)
-        get_IP = ip_entry.get()
 
         port = tk.Label(self.root, text="Port: ")
         port_entry = tk.Entry(self.root)
-        get_port = port_entry.get()
-        print (get_port)
+        port_var = 0
+        ip_var = ""
 
-        enter_button = tk.Button(self.root, text="ENTER", command= lambda: GUIFunctions.IP_and_port(get_IP, get_port))
+        def getValue(ip,port,entry1,entry2):
+            ip = entry1.get()
+            port = int(entry2.get())
+            GUIFunctions.create_Connections(ip,port)
+
+        enter_button = tk.Button(self.root, text="ENTER", command = lambda: getValue(ip_var,port_var,ip_entry,port_entry))
 
         ip.grid(row=0, column=0)
         ip_entry.grid(row=0, column=1)
