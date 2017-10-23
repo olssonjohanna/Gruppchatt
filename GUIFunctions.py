@@ -19,10 +19,10 @@ def register(name_entry,email_entry,username_entry,password_entry):
     #om användare redan registrerad, om användarnamn redan finns
 
 # kommer från LOGIN knappen: kontrollera om det man skrivit finns på filen sen till chattfönstret
-def login(username_entry,password_entry):
-    file = open("RegisterdUserLog.txt", "r")
+#def login(username_entry,password_entry):
+#    file = open("RegisterdUserLog.txt", "r")
 
-    if username_entry == file.read():
+#    if username_entry == file.read():
 
 
         #jämnföra user och pass med filen
