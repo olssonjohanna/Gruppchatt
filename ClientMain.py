@@ -4,17 +4,20 @@ from ClientRecieve import Recieve_message
 from ClientSend import Send_message
 
 client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-client_socket.connect(('127.0.0.1',9999))
 
-thread_send = Recieve_message(client_socket)
-thread_send.start()
+def create_Connections(my_ip, my_port):
+    client_socket.connect((my_ip,my_port))
+    threadsend()
 
-thread_recv = Send_message(client_socket)
-thread_recv.start()
+def threadsend():
 
-#wait until sender will die
+    thread_send = Recieve_message(client_socket)
+    thread_send.start()
 
-thread_send.join()
+    thread_recv = Send_message(client_socket)
+    thread_recv.start()
+
+        #wait until sender will die
+    thread_send.join()
 os._exit(0)
-
 #client_socket.close()
