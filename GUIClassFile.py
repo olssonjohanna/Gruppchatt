@@ -1,7 +1,6 @@
 import tkinter as tk
-from threading import Thread
 import GUIFunctions
-
+import tkinter.messagebox
 class GuiClass:
 
     def __init__(self):
@@ -50,9 +49,10 @@ class GuiClass:
 
         root.mainloop()
 
-    def login_and_register(self):
+    def first_page(self):
 
-        def sub_func_register(root):
+        #SUBFUNC TO REGISTER NEW
+        def sub_func_register(root, login):
             child = tk.Toplevel(root)
 
             welcome_register = tk.Label(child, text="REGISTER NEW USER")
@@ -69,8 +69,7 @@ class GuiClass:
             password = tk.Label(child, text="Password: ")
             password_entry = tk.Entry(child)
 
-            register_button = tk.Button(child, text="REGISTER", command=GUIFunctions.register(name_entry.get(),email_entry.get(),
-                                                                                              username_entry.get(), password_entry.get()))
+            register_button = tk.Button(child, text="REGISTER", command= login)
 
             welcome_register.grid(row=0, column=0)
             name.grid(row=1, column=0)
@@ -98,8 +97,7 @@ class GuiClass:
 
         login_button = tk.Button(new_root, text="LOGIN", command=lambda: GUIFunctions.login(username_entry.get(),password_entry.get()))
 
-        register_button = tk.Button(new_root, text="REGISTER NEW USER",
-                                    command=lambda: sub_func_register(new_root))
+        register_button = tk.Button(new_root, text="REGISTER NEW USER", command=lambda: sub_func_register(new_root))
 
         username.grid(row=0, column=0)
         username_entry.grid(row=0, column=1)
@@ -109,11 +107,6 @@ class GuiClass:
         register_button.grid(row=2, column=1)
 
     def first_page(self):
-
-        #SUBFUNC TO REGISTER NEW
-
-        #SECOND WINDOW: LOGIN AND REGISTER
-
         #FIRST PAGE: IP AND PORT
         ip = tk.Label(self.root, text="IP: ")
         ip_entry = tk.Entry(self.root)
