@@ -2,7 +2,7 @@ import socket
 import os
 from ClientRecieve import Recieve_message
 from ClientSend import Send_message
-
+#
 #client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 
 def create_Connections(my_ip, my_port):
