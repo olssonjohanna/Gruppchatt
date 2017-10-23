@@ -2,7 +2,7 @@ import socket
 from ServerSend import Server_sender
 from ServerRecieveAndHandler import Server_reciever_Handler
 from GUIFunctions import register
-
+#
 class ServerMain:
 
     def registerAccount(name_entry,email_entry,username_entry,password_entry):
