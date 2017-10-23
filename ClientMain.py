@@ -20,5 +20,6 @@ def threadsend(client_socket):
 
         #wait until sender will die
     thread_send.join()
-os._exit(0)
+
+#os._exit(0)
 #client_socket.close()
