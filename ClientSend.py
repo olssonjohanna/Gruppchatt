@@ -8,5 +8,5 @@ class Send_message(threading.Thread):
 
     def run(self):
         while True:
-            client_input = input("input:")
+            client_input = input("")
             self.client_socket.send(str.encode(client_input))

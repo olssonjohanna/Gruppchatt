@@ -94,6 +94,10 @@ class GuiClass:
 
         except:
             pass
+
+
+        print ("we are here")
+
         username = tk.Label(new_root, text="Username: ")
         username_entry = tk.Entry(new_root)
 
@@ -112,6 +116,8 @@ class GuiClass:
         login_button.grid(row=2, column=0)
         register_button.grid(row=2, column=1)
 
+        new_root.mainloop()
+
     def first_page(self):
         #FIRST PAGE: IP AND PORT
         ip = tk.Label(self.root, text="IP: ")
@@ -123,13 +129,11 @@ class GuiClass:
         ip_var = ""
 
         def getValue(ip,port,entry1,entry2):
-
          try:
-            ip = entry1.get()
-            port = int(entry2.get())
-            GUIFunctions.create_Connections(ip,port)
+            ip_send = entry1.get()
+            port_send = int(entry2.get())
+            GUIFunctions.create_Connections(ip_send,port_send)
             self.login_and_register()
-
          except ValueError:
              tkinter.messagebox.showinfo("Error","Port should be a number")
              return False
