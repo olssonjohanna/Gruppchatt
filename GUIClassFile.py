@@ -1,7 +1,7 @@
 import tkinter as tk
 from threading import Thread
 import GUIFunctions
-
+import tkinter.messagebox
 class GuiClass:
 
     def __init__(self):
@@ -118,9 +118,13 @@ class GuiClass:
         ip_var = ""
 
         def getValue(ip,port,entry1,entry2):
+         try:
             ip = entry1.get()
             port = int(entry2.get())
             GUIFunctions.create_Connections(ip,port)
+         except ValueError:
+             tkinter.messagebox.showinfo("Error","Port should be a number")
+             return False
 
         enter_button = tk.Button(self.root, text="ENTER", command = lambda: getValue(ip_var,port_var,ip_entry,port_entry))
 
