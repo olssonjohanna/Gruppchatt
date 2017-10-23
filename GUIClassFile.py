@@ -116,6 +116,7 @@ class GuiClass:
         port = tk.Label(self.root, text="Port: ")
         port_entry = tk.Entry(self.root)
         get_port = port_entry.get()
+        print (get_port)
 
         enter_button = tk.Button(self.root, text="ENTER", command= lambda: GUIFunctions.IP_and_port(get_IP, get_port))
 
