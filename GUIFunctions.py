@@ -24,12 +24,8 @@ def login(username_entry,password_entry):
     file = open("users.txt", "r")
 
     if username_entry == file.read():
+        pass
 
         #jämnföra user och pass med filen
 
 #om det är OK - skicka till chattfönstret
-#vid nekad: skicka messagebox "fel"
-
-
-
-
