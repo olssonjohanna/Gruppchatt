@@ -19,6 +19,7 @@ class Server_reciever_Handler(threading.Thread):
 
                 for sock in self.list_of_client_socktes:
                     sock.send(str.encode(var))
+
             except:
                 self.client_socket.close()
                 self.list_of_client_socktes.remove(self.client_socket)

@@ -1,5 +1,7 @@
+
+#denna kan vi ta bort för detta är bara på terminal, eftersom vi har GUI func som skickar via knappen
+
 import threading
-#import socket
 
 class Send_message(threading.Thread):
     def __init__(self, client_socket):

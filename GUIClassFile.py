@@ -1,6 +1,7 @@
 import tkinter as tk
 import GUIFunctions
 from ServerMain import register
+import ClientMain
 
 import tkinter.messagebox
 class GuiClass:
@@ -87,16 +88,13 @@ class GuiClass:
             password_entry.grid(row=4, column=1)
             register_button.grid(row=5, column=0)
 
-        new_root = tk.Tk()
-
         try:
             self.root.destroy()
 
         except:
             pass
 
-
-        print ("we are here")
+        new_root = tk.Tk()
 
         username = tk.Label(new_root, text="Username: ")
         username_entry = tk.Entry(new_root)
@@ -106,8 +104,7 @@ class GuiClass:
 
         login_button = tk.Button(new_root, text="LOGIN", command=lambda: GUIFunctions.login(username_entry.get(),password_entry.get()))
 
-        register_button = tk.Button(new_root, text="REGISTER NEW USER",
-                                    command=lambda: sub_func_register(new_root))
+        register_button = tk.Button(new_root, text="REGISTER NEW USER", command=lambda: sub_func_register(new_root))
 
         username.grid(row=0, column=0)
         username_entry.grid(row=0, column=1)
@@ -128,17 +125,18 @@ class GuiClass:
         port_var = 0
         ip_var = ""
 
-        def getValue(ip,port,entry1,entry2):
+        def getValue(entry1,entry2):
          try:
             ip_send = entry1.get()
             port_send = int(entry2.get())
-            GUIFunctions.create_Connections(ip_send,port_send)
+            ClientMain.create_Connections(ip_send,port_send)
             self.login_and_register()
+
          except ValueError:
              tkinter.messagebox.showinfo("Error","Port should be a number")
              return False
 
-        enter_button = tk.Button(self.root, text="ENTER", command = lambda: getValue(ip_var,port_var,ip_entry,port_entry))
+        enter_button = tk.Button(self.root, text="ENTER", command = lambda: getValue(ip_entry,port_entry))
 
         ip.grid(row=0, column=0)
         ip_entry.grid(row=0, column=1)

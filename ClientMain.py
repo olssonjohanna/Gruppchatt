@@ -12,5 +12,5 @@ def create_Connections(my_ip, my_port):
     thread_recv = Send_message(client_socket)
     thread_recv.start()
 
-    thread_send.join()
+    #thread_send.join()
 

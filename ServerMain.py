@@ -2,7 +2,7 @@ import socket
 from ServerSend import Server_sender
 from ServerRecieveAndHandler import Server_reciever_Handler
 from GUIFunctions import register
-#
+
 class ServerMain:
 
     def registerAccount(name_entry,email_entry,username_entry,password_entry):
@@ -22,6 +22,7 @@ class ServerMain:
 
         sender = Server_sender(list_of_client_sockets)
         sender.start()
+
         while True:
             print("Waiting for connection...")
             client_socket, client_addr = self.server_socket.accept()
