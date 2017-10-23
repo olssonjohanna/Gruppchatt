@@ -7,8 +7,10 @@ from ClientSend import Send_message
 
 def create_Connections(my_ip, my_port):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    #my_port = int(my_port)
     client_socket.connect((my_ip,my_port))
-    threadsend(client_socket)
+
+    #threadsend(client_socket)
 
 def threadsend(client_socket):
 
