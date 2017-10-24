@@ -127,7 +127,7 @@ class GuiClass:
 
 
         def getValue(entry1,entry2):
-         #try:
+         try:
             ip_send = entry1.get()
             port_send = int(entry2.get())
             if ip_send == ServerFunc.Ip and port_send == ServerFunc.port:
@@ -138,9 +138,11 @@ class GuiClass:
                 tkinter.messagebox.showinfo("Error", "Wrong Ip or Port")
                 self.first_page()
 
-         #except ValueError:
-          #   tkinter.messagebox.showinfo("Error","Port should be a number")
-           #  return False
+         except ValueError:
+             tkinter.messagebox.showinfo("Error","Port should be a number")
+             #ip_entry.delete(0,tkinter.END)
+             port_entry.delete(0,tkinter.END)
+             return False
 
         enter_button = tk.Button(self.root, text="ENTER", command = lambda: getValue(ip_entry,port_entry))
 
