@@ -1,6 +1,5 @@
 import tkinter as tk
 import GUIFunctions
-from GUIFunctions import register
 import ClientMain
 import ServerFunc
 import tkinter.messagebox
@@ -16,7 +15,7 @@ class GuiClass:
 
     def updateChat(text,windowText):
         windowText.config(state=tk.NORMAL)
-        windowText.insert(tk.END,text+"\n")
+        windowText.insert(tk.END,text + "\n")
         windowText.config(state=tk.DISABLED)
         windowText.see(tk.END)
 
@@ -25,7 +24,7 @@ class GuiClass:
         chatText.delete('1.0', tk.END)
         GuiClass.updateChat(input,windowText)
 
-    def chatWindow():
+    def chatWindow(self):
         root = tk.Tk()
 
         root.geometry('{}x{}'.format(600, 400))
@@ -35,7 +34,7 @@ class GuiClass:
         textFrame = tk.Frame(height='250',bd = 1,width='100',padx = 5)
         windowText = tk.Text(chatFrame,height='15',width='70')
         chatText = tk.Text(textFrame,height='5',width='60')
-        sendBtn = tk.Button(textFrame,text='Send',height = '5',width=10,command = lambda: GuiClass.retrieve_input(chatText,windowText))
+        sendBtn = tk.Button(textFrame,text='Send',height = '5',width=10,command = lambda: GuiClass.retrieve_input(chatText, windowText))
 
         scrollb = tk.Scrollbar(chatFrame, command=windowText.yview)
         scrollb.grid(row=0, column=1, sticky='nsew')
@@ -48,8 +47,8 @@ class GuiClass:
         windowText.grid(row=0, column=0, sticky="nsew", padx=2, pady=2)
         chatFrame.grid_rowconfigure(0, weight=1)
         chatFrame.grid_columnconfigure(0, weight=1)
-        chatFrame.pack(fill=tk.X, padx=5, pady=20)
-        textFrame.pack(fill=tk.X, padx=5, pady=20)
+        chatFrame.grid(fill=tk.X, padx=5, pady=20)
+        textFrame.grid(fill=tk.X, padx=5, pady=20)
         chatText.grid(row=0)
         sendBtn.grid(row=0,column=1)
 
@@ -74,11 +73,10 @@ class GuiClass:
             password = tk.Label(child, text="Password: ")
             password_entry = tk.Entry(child)
 
-            def getEntries(name,email,username,password):
-                register(name.get(), email.get(),
-                         username.get(), password.get())
+            def getEntries(name,email,username,password, child,self):
+                GUIFunctions.register(name.get(), email.get(),username.get(), password.get(), child,self)
 
-            register_button = tk.Button(child, text="REGISTER", command=lambda: getEntries(name_entry,email_entry,username_entry,password_entry))
+            register_button = tk.Button(child, text="REGISTER", command=lambda: getEntries(name_entry,email_entry,username_entry,password_entry, child,self))
 
             welcome_register.grid(row=0, column=0)
             name.grid(row=1, column=0)
@@ -105,10 +103,9 @@ class GuiClass:
         password = tk.Label(new_root, text="Password: ")
         password_entry = tk.Entry(new_root)
 
-        login_button = tk.Button(new_root, text="LOGIN", command=lambda: GUIFunctions.login(username_entry.get(),password_entry.get()))
+        login_button = tk.Button(new_root, text="LOGIN", command=lambda: GUIFunctions.login(username_entry.get(),password_entry.get(), self))
 
-        register_button = tk.Button(new_root, text="REGISTER NEW USER",
-                                    command=lambda: sub_func_register(new_root))
+        register_button = tk.Button(new_root, text="REGISTER NEW USER", command=lambda: sub_func_register(new_root))
 
         username.grid(row=0, column=0)
         username_entry.grid(row=0, column=1)
@@ -126,8 +123,6 @@ class GuiClass:
 
         port = tk.Label(self.root, text="Port: ")
         port_entry = tk.Entry(self.root)
-        port_var = 0
-        ip_var = ""
 
         def getValue(entry1,entry2):
          try:
@@ -143,7 +138,6 @@ class GuiClass:
 
          except ValueError:
              tkinter.messagebox.showinfo("Error","Port should be a number")
-             #ip_entry.delete(0,tkinter.END)
              port_entry.delete(0,tkinter.END)
              return False
 
@@ -153,4 +147,4 @@ class GuiClass:
         ip_entry.grid(row=0, column=1)
         port.grid(row=1, column=0)
         port_entry.grid(row=1, column=1)
-        enter_button.grid(row=2, column=0)
+        enter_button.grid(row=2, column=1)
