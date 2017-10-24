@@ -1,8 +1,8 @@
 import tkinter as tk
 import GUIFunctions
-from ServerMain import register
+from GUIFunctions import register
 import ClientMain
-
+import ServerFunc
 import tkinter.messagebox
 class GuiClass:
 
@@ -88,6 +88,8 @@ class GuiClass:
             password_entry.grid(row=4, column=1)
             register_button.grid(row=5, column=0)
 
+
+
         try:
             self.root.destroy()
 
@@ -122,19 +124,23 @@ class GuiClass:
 
         port = tk.Label(self.root, text="Port: ")
         port_entry = tk.Entry(self.root)
-        port_var = 0
-        ip_var = ""
+
 
         def getValue(entry1,entry2):
-         try:
+         #try:
             ip_send = entry1.get()
             port_send = int(entry2.get())
-            ClientMain.create_Connections(ip_send,port_send)
-            self.login_and_register()
+            if ip_send == ServerFunc.Ip and port_send == ServerFunc.port:
+                ClientMain.create_Connections(ip_send, port_send)
+                self.login_and_register()
 
-         except ValueError:
-             tkinter.messagebox.showinfo("Error","Port should be a number")
-             return False
+            else:
+                tkinter.messagebox.showinfo("Error", "Wrong Ip or Port")
+                self.first_page()
+
+         #except ValueError:
+          #   tkinter.messagebox.showinfo("Error","Port should be a number")
+           #  return False
 
         enter_button = tk.Button(self.root, text="ENTER", command = lambda: getValue(ip_entry,port_entry))
 
@@ -142,4 +148,4 @@ class GuiClass:
         ip_entry.grid(row=0, column=1)
         port.grid(row=1, column=0)
         port_entry.grid(row=1, column=1)
-        enter_button.grid(row=2, column=0)
+        enter_button.grid(row=2, column=1)

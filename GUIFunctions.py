@@ -29,3 +29,8 @@ def register(name_entry,email_entry,username_entry,password_entry):
         #jämnföra user och pass med filen
 
 #om det är OK - skicka till chattfönstret
+#vid nekad: skicka messagebox "fel"
+
+
+
+
