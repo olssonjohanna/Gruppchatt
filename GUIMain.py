@@ -1,3 +1,3 @@
 from GUIClassFile import GuiClass
-Gui = GuiClass
-Gui()
+Gui = GuiClass()
+Gui.run()

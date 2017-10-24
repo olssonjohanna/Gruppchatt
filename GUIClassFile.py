@@ -9,20 +9,23 @@ class GuiClass:
     def __init__(self):
         self.root = tk.Tk()
         self.first_page()
+        self.clientSocket=""
+
+    def run(self):
         self.root.mainloop()
 
-    def updateChat(self,text):
-        self.windowText.config(state=tk.NORMAL)
-        self.windowText.insert(tk.END,text+"\n")
-        self.windowText.config(state=tk.DISABLED)
-        self.windowText.see(tk.END)
+    def updateChat(text,windowText):
+        windowText.config(state=tk.NORMAL)
+        windowText.insert(tk.END,text+"\n")
+        windowText.config(state=tk.DISABLED)
+        windowText.see(tk.END)
 
-    def retrieve_input(self):
-        input = self.chatText.get('1.0', tk.END)
-        self.chatText.delete('1.0', tk.END)
-        self.updateChat(input)
+    def retrieve_input(chatText,windowText):
+        input = chatText.get('1.0', tk.END)
+        chatText.delete('1.0', tk.END)
+        GuiClass.updateChat(input,windowText)
 
-    def chatWindow(self):
+    def chatWindow():
         root = tk.Tk()
 
         root.geometry('{}x{}'.format(600, 400))
@@ -30,24 +33,24 @@ class GuiClass:
 
         chatFrame = tk.Frame(height='250',bd = 1, width = '100',padx = 5)
         textFrame = tk.Frame(height='250',bd = 1,width='100',padx = 5)
-        self.windowText = tk.Text(chatFrame,height='15',width='70')
-        self.chatText = tk.Text(textFrame,height='5',width='60')
-        sendBtn = tk.Button(textFrame,text='Send',height = '5',width=10,command = lambda: self.retrieve_input())
+        windowText = tk.Text(chatFrame,height='15',width='70')
+        chatText = tk.Text(textFrame,height='5',width='60')
+        sendBtn = tk.Button(textFrame,text='Send',height = '5',width=10,command = lambda: GuiClass.retrieve_input(chatText,windowText))
 
-        scrollb = tk.Scrollbar(chatFrame, command=self.windowText.yview)
+        scrollb = tk.Scrollbar(chatFrame, command=windowText.yview)
         scrollb.grid(row=0, column=1, sticky='nsew')
-        self.windowText['yscrollcommand'] = scrollb.set
+        windowText['yscrollcommand'] = scrollb.set
 
-        root.bind("<Return>", lambda x: self.retrieve_input())
+        root.bind("<Return>", lambda x: GuiClass.retrieve_input(chatText,windowText))
 
-        self.windowText.config(state=tk.DISABLED)
+        windowText.config(state=tk.DISABLED)
 
-        self.windowText.grid(row=0, column=0, sticky="nsew", padx=2, pady=2)
+        windowText.grid(row=0, column=0, sticky="nsew", padx=2, pady=2)
         chatFrame.grid_rowconfigure(0, weight=1)
         chatFrame.grid_columnconfigure(0, weight=1)
         chatFrame.pack(fill=tk.X, padx=5, pady=20)
         textFrame.pack(fill=tk.X, padx=5, pady=20)
-        self.chatText.grid(row=0)
+        chatText.grid(row=0)
         sendBtn.grid(row=0,column=1)
 
         root.mainloop()
@@ -88,8 +91,6 @@ class GuiClass:
             password_entry.grid(row=4, column=1)
             register_button.grid(row=5, column=0)
 
-
-
         try:
             self.root.destroy()
 
@@ -106,7 +107,8 @@ class GuiClass:
 
         login_button = tk.Button(new_root, text="LOGIN", command=lambda: GUIFunctions.login(username_entry.get(),password_entry.get()))
 
-        register_button = tk.Button(new_root, text="REGISTER NEW USER", command=lambda: sub_func_register(new_root))
+        register_button = tk.Button(new_root, text="REGISTER NEW USER",
+                                    command=lambda: sub_func_register(new_root))
 
         username.grid(row=0, column=0)
         username_entry.grid(row=0, column=1)
@@ -124,7 +126,8 @@ class GuiClass:
 
         port = tk.Label(self.root, text="Port: ")
         port_entry = tk.Entry(self.root)
-
+        port_var = 0
+        ip_var = ""
 
         def getValue(entry1,entry2):
          try:
@@ -150,4 +153,4 @@ class GuiClass:
         ip_entry.grid(row=0, column=1)
         port.grid(row=1, column=0)
         port_entry.grid(row=1, column=1)
-        enter_button.grid(row=2, column=1)
+        enter_button.grid(row=2, column=0)
