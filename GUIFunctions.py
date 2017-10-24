@@ -33,7 +33,7 @@ def register(name_entry,email_entry,username_entry,password_entry, child,self):
             return
 
         else:
-            messagebox.showinfo("Sucess", "You are now registred")
+            messagebox.showinfo("Sucess", "You are now registred. Please login!")
             child.destroy()
             return
 
@@ -44,7 +44,7 @@ def register(name_entry,email_entry,username_entry,password_entry, child,self):
             return
 
         else:
-            messagebox.showinfo("Sucess", "You are now registred")
+            messagebox.showinfo("Sucess", "You are now registred. Please login!")
             child.destroy()
             return
 
