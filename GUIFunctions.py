@@ -67,6 +67,8 @@ def login(username_entry,password_entry,self, new_root):
         root = tk.Tk()
         root.withdraw()
         messagebox.showerror("Error","Invalid username/password")
+        GuiClass.login_and_register(self)
+
 
 
 
