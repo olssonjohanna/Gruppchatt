@@ -47,8 +47,8 @@ class GuiClass:
         windowText.grid(row=0, column=0, sticky="nsew", padx=2, pady=2)
         chatFrame.grid_rowconfigure(0, weight=1)
         chatFrame.grid_columnconfigure(0, weight=1)
-        chatFrame.grid(fill=tk.X, padx=5, pady=20)
-        textFrame.grid(fill=tk.X, padx=5, pady=20)
+        chatFrame.grid(padx=5, pady=20)
+        textFrame.grid(padx=5, pady=20)
         chatText.grid(row=0)
         sendBtn.grid(row=0,column=1)
 
@@ -73,8 +73,7 @@ class GuiClass:
             password = tk.Label(child, text="Password: ")
             password_entry = tk.Entry(child)
 
-            def getEntries(name,email,username,password, child,self):
-                GUIFunctions.register(name.get(), email.get(),username.get(), password.get(), child,self)
+            def getEntries(name,email,username,password, child,self):GUIFunctions.register(name.get(), email.get(),username.get(), password.get(), child,self)
 
             register_button = tk.Button(child, text="REGISTER", command=lambda: getEntries(name_entry,email_entry,username_entry,password_entry, child,self))
 
@@ -103,7 +102,7 @@ class GuiClass:
         password = tk.Label(new_root, text="Password: ")
         password_entry = tk.Entry(new_root)
 
-        login_button = tk.Button(new_root, text="LOGIN", command=lambda: GUIFunctions.login(username_entry.get(),password_entry.get(), self))
+        login_button = tk.Button(new_root, text="LOGIN", command=lambda: GUIFunctions.login(username_entry.get(),password_entry.get(), self, new_root))
 
         register_button = tk.Button(new_root, text="REGISTER NEW USER", command=lambda: sub_func_register(new_root))
 
@@ -117,7 +116,6 @@ class GuiClass:
         new_root.mainloop()
 
     def first_page(self):
-        #FIRST PAGE: IP AND PORT
         ip = tk.Label(self.root, text="IP: ")
         ip_entry = tk.Entry(self.root)
 
