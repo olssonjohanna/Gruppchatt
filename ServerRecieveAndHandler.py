@@ -10,21 +10,25 @@ class Server_reciever_Handler(threading.Thread):
 
 
     def run(self):
-        from GUIClassFile import GuiClass
+        print("startat meddelande tagare")
         while True:
 
-            try:
-                message = self.client_socket.recv(1024).decode()
+            #try:
+                self.message = self.client_socket.recv(1024).decode()
 
-                var = str (self.client_addr)+" " + message
-                obj = GuiClass()
-                obj.updateChat(message)
+                self.var = str (self.client_addr)+" " + self.message
+                print(self.message)
 
-                for sock in self.list_of_client_socktes:
-                    sock.send(str.encode(var))
+    def sendToAllSockets(self):
+        from GUIClassFile import GuiClass
+        obj = GuiClass()
 
-            except:
-                self.client_socket.close()
-                self.list_of_client_socktes.remove(self.client_socket)
-                print(str(self.client_addr)+" Disconnected")
-                return
+        obj.updateChat(self.message)
+        for sock in self.list_of_client_socktes:
+            sock.send(str.encode(self.var))
+
+            #except:
+            #    self.client_socket.close()
+             #   self.list_of_client_socktes.remove(self.client_socket)
+              #  print(str(self.client_addr)+" Disconnected")
+               # return

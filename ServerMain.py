@@ -1,5 +1,5 @@
 from ServerFunc import ServerMain
 import GUIClassFile
 
-server = ServerMain
-server()
+server = ServerMain()
+server.start()

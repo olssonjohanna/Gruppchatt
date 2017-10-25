@@ -5,6 +5,7 @@ import ServerFunc
 import ServerSend
 import ClientSend
 import tkinter.messagebox
+
 class GuiClass:
 
     def __init__(self):
@@ -14,6 +15,7 @@ class GuiClass:
         self.root = tk.Tk()
         self.first_page()
         self.root.mainloop()
+
 
     def updateChat(self,text):
         self.windowText.config(state=tk.NORMAL)
@@ -27,6 +29,7 @@ class GuiClass:
         self.sendMessage(socket,input)
 
     def sendMessage(self,client_socket,message):
+
         client_socket.send(str.encode(message))
 
     def chatWindow(self,socket):
@@ -107,7 +110,7 @@ class GuiClass:
         password = tk.Label(new_root, text="Password: ")
         password_entry = tk.Entry(new_root)
 
-        login_button = tk.Button(new_root, text="LOGIN", command=lambda: GUIFunctions.login(username_entry.get(),password_entry.get(), self, new_root))
+        login_button = tk.Button(new_root, text="LOGIN", command=lambda: GUIFunctions.login(username_entry.get(),password_entry.get(), self, new_root,self.ip_send,self.port_send))
 
         register_button = tk.Button(new_root, text="REGISTER NEW USER", command=lambda: sub_func_register(new_root))
 
@@ -129,11 +132,11 @@ class GuiClass:
 
         def getValue(entry1,entry2):
          try:
-            ip_send = entry1.get()
-            port_send = int(entry2.get())
-            if ip_send == ServerFunc.Ip and port_send == ServerFunc.port:
-                obj = ClientMain.Client()
-                obj.run(ip_send,port_send)
+            self.ip_send = entry1.get()
+            self.port_send = int(entry2.get())
+            if self.ip_send == ServerFunc.Ip and self.port_send == ServerFunc.port:
+                obj = ClientMain.Client(self.ip_send,self.port_send,self)
+                obj.run()
 
                 self.login_and_register()
 

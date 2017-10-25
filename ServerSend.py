@@ -9,5 +9,5 @@ class Server_sender(threading.Thread):
     def run(self):
         while True:
             for client_socket in self.list_of_client_sockets:
-                message = input(" ")
+                message = input("")
                 client_socket.send(str.encode(message))

@@ -12,7 +12,7 @@ class ServerMain:
         GUIFunctions.register(name_entry,email_entry,username_entry,password_entry,self)
 
     def __init__(self):
-        self.start()
+        pass
 
 
     def start(self):
@@ -37,5 +37,7 @@ class ServerMain:
 
             list_of_client_sockets.append(client_socket)
 
-            reciver = Server_reciever_Handler(client_socket,list_of_client_sockets,client_addr)
-            reciver.start()
+            self.reciver = Server_reciever_Handler(client_socket,list_of_client_sockets,client_addr)
+
+    def startRecv(self):
+        self.reciver.start()
