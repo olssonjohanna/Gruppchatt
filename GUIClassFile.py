@@ -2,29 +2,34 @@ import tkinter as tk
 import GUIFunctions
 import ClientMain
 import ServerFunc
+import ServerSend
+import ClientSend
 import tkinter.messagebox
 class GuiClass:
 
     def __init__(self):
-        self.root = tk.Tk()
-        self.first_page()
-        self.clientSocket=""
+        pass
 
     def run(self):
+        self.root = tk.Tk()
+        self.first_page()
         self.root.mainloop()
 
-    def updateChat(text,windowText):
-        windowText.config(state=tk.NORMAL)
-        windowText.insert(tk.END,text + "\n")
-        windowText.config(state=tk.DISABLED)
-        windowText.see(tk.END)
+    def updateChat(self,text):
+        self.windowText.config(state=tk.NORMAL)
+        self.windowText.insert(tk.END,text + "\n")
+        self.windowText.config(state=tk.DISABLED)
+        self.windowText.see(tk.END)
 
-    def retrieve_input(chatText,windowText):
-        input = chatText.get('1.0', tk.END)
-        chatText.delete('1.0', tk.END)
-        GuiClass.updateChat(input,windowText)
+    def retrieve_input(self,socket):
+        input = self.chatText.get('1.0', tk.END)
+        self.chatText.delete('1.0', tk.END)
+        self.sendMessage(socket,input)
 
-    def chatWindow(self):
+    def sendMessage(self,client_socket,message):
+        client_socket.send(str.encode(message))
+
+    def chatWindow(self,socket):
         root = tk.Tk()
 
         root.geometry('{}x{}'.format(600, 400))
@@ -32,24 +37,24 @@ class GuiClass:
 
         chatFrame = tk.Frame(height='250',bd = 1, width = '100',padx = 5)
         textFrame = tk.Frame(height='250',bd = 1,width='100',padx = 5)
-        windowText = tk.Text(chatFrame,height='15',width='70')
-        chatText = tk.Text(textFrame,height='5',width='60')
-        sendBtn = tk.Button(textFrame,text='Send',height = '5',width=10,command = lambda: GuiClass.retrieve_input(chatText, windowText))
+        self.windowText = tk.Text(chatFrame,height='15',width='70')
+        self.chatText = tk.Text(textFrame,height='5',width='60')
+        sendBtn = tk.Button(textFrame,text='Send',height = '5',width=10,command = lambda: GuiClass.retrieve_input(self,socket))
 
-        scrollb = tk.Scrollbar(chatFrame, command=windowText.yview)
+        scrollb = tk.Scrollbar(chatFrame, command=self.windowText.yview)
         scrollb.grid(row=0, column=1, sticky='nsew')
-        windowText['yscrollcommand'] = scrollb.set
+        self.windowText['yscrollcommand'] = scrollb.set
 
-        root.bind("<Return>", lambda x: GuiClass.retrieve_input(chatText,windowText))
+        root.bind("<Return>", lambda x: GuiClass.retrieve_input(self,socket))
 
-        windowText.config(state=tk.DISABLED)
+        self.windowText.config(state=tk.DISABLED)
 
-        windowText.grid(row=0, column=0, sticky="nsew", padx=2, pady=2)
+        self.windowText.grid(row=0, column=0, sticky="nsew", padx=2, pady=2)
         chatFrame.grid_rowconfigure(0, weight=1)
         chatFrame.grid_columnconfigure(0, weight=1)
         chatFrame.grid(padx=5, pady=20)
         textFrame.grid(padx=5, pady=20)
-        chatText.grid(row=0)
+        self.chatText.grid(row=0)
         sendBtn.grid(row=0,column=1)
 
         root.mainloop()
@@ -127,7 +132,9 @@ class GuiClass:
             ip_send = entry1.get()
             port_send = int(entry2.get())
             if ip_send == ServerFunc.Ip and port_send == ServerFunc.port:
-                ClientMain.create_Connections(ip_send, port_send)
+                obj = ClientMain.Client()
+                obj.run(ip_send,port_send)
+
                 self.login_and_register()
 
             else:

@@ -1,10 +1,10 @@
-from ClientMain import create_Connections
+import ClientMain
 import GUIClassFile
 from tkinter import messagebox
 import tkinter as tk
 
 def IP_and_port(get_ip, get_port):
-    create_Connections(get_ip, get_port)
+    ClientMain.Client(get_ip, get_port)
 
 def register(name_entry,email_entry,username_entry,password_entry, child,self):
 
@@ -56,7 +56,9 @@ def login(username_entry,password_entry,self, new_root):
     for i in range (len(login_info)):
         if a == 2:
             if login_info[i] == username_entry and login_info[i+1] == password_entry:
-                GuiClass.chatWindow(self)
+                obj = ClientMain.Client()
+                obj.run("127.0.0.1",9999)
+                obj.chatWindow()
                 found = True
         if a == 4:
             a = 0
@@ -69,6 +71,7 @@ def login(username_entry,password_entry,self, new_root):
         messagebox.showerror("Error","Invalid username/password")
         GuiClass.login_and_register(self)
 
-
+    def createChatWindow(socket):
+        GUIClassFile.GuiClass.chatWindow(socket)
 
 

@@ -1,20 +1,27 @@
 import socket
 from ClientRecieve import Recieve_message
-from ClientSend import Send_message
 import tkinter.messagebox
+class Client:
 
-def create_Connections(my_ip, my_port):
-    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    def __init__(self):
+        self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    try:
-        client_socket.connect((my_ip,my_port))
-    except:
-        tkinter.messagebox.showinfo("Error","Wrong Ip or Port")
 
-    thread_send = Recieve_message(client_socket)
-    thread_send.start()
+    def run(self,my_ip,my_port):
+        try:
+            self.client_socket.connect((my_ip, my_port))
+        except:
+            tkinter.messagebox.showinfo("Error", "Wrong Ip or Port")
 
-    thread_recv = Send_message(client_socket)
-    thread_recv.start()
+        thread_recv = Recieve_message(self.client_socket)
+        thread_recv.start()
+
+
+    def chatWindow(self):
+        import GUIClassFile
+
+        obj = GUIClassFile.GuiClass()
+        obj.chatWindow(self.client_socket)
+
 
 
