@@ -15,7 +15,6 @@ class ServerMain:
     def __init__(self):
         pass
 
-
     def start(self):
 
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -40,5 +39,6 @@ class ServerMain:
 
             self.reciver = Server_reciever_Handler(client_socket,list_of_client_sockets,client_addr)
 
-    def startRecv(self):
-        self.reciver.start()
+
+ #   def startRecv(self):
+            self.reciver.start()

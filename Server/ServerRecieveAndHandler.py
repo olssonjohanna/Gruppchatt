@@ -8,14 +8,10 @@ class Server_reciever_Handler(threading.Thread):
         self.client_addr = client_addr_
 
     def run(self):
-        print("startat meddelande tagare")
         while True:
-
-            #try:
-                self.message = self.client_socket.recv(1024).decode()
-
-                self.var = str (self.client_addr)+" " + self.message
-                print(self.message)
+            self.message = self.client_socket.recv(1024).decode()
+            self.var = str(self.client_addr)+" " + self.message
+            print(self.message)
 
     def sendToAllSockets(self):
         from Client.GUIClassFile import GuiClass

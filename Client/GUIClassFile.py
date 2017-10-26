@@ -2,6 +2,8 @@ import tkinter as tk
 import tkinter.messagebox
 from Client import ClientMainFuncs, GUIFunctions
 from Server import ServerFunc
+import _thread
+import time
 
 class GuiClass:
 
@@ -55,6 +57,11 @@ class GuiClass:
         self.chatText.grid(row=0)
         sendBtn.grid(row=0,column=1)
 
+        _thread.start_new_thread(self.taskToNewWorker, (root,))
+
+        time.sleep(60)
+
+    def taskToNewWorker(self, root):
         root.mainloop()
 
     def login_and_register(self):

@@ -5,7 +5,6 @@ class Server_sender(threading.Thread):
         threading.Thread.__init__(self)
         self.list_of_client_sockets = list_of_client_sockets_
 
-
     def run(self):
         while True:
             for client_socket in self.list_of_client_sockets:

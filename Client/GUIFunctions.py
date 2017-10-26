@@ -56,8 +56,11 @@ def login(username_entry,password_entry,self,new_root,my_ip,my_port):
             if login_info[i] == username_entry and login_info[i+1] == password_entry:
                 obj = ClientMainFuncs.Client(my_ip, my_port, self)
                 obj.run()
+                print ("1")
                 obj.chatWindow()
+                print("2")
                 obj.startRecv()
+                print ("3")
                 found = True
         if a == 4:
             a = 0
