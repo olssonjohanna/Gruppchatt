@@ -1,4 +1,6 @@
 from Client import ClientMainFuncs, GUIClassFile
+import tkinter as tk
+import tkinter.messagebox
 
 
 def IP_and_port():
