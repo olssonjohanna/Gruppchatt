@@ -7,6 +7,9 @@ class Server_sender(threading.Thread):
 
     def run(self):
         while True:
+            message = input("")
+
+            print(str(self.list_of_client_sockets))
             for client_socket in self.list_of_client_sockets:
-                message = input("")
+
                 client_socket.send(str.encode(message))

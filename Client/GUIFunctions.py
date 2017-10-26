@@ -57,9 +57,11 @@ def login(username_entry,password_entry,self,new_root,my_ip,my_port):
                 obj = ClientMainFuncs.Client(my_ip, my_port, self)
                 obj.run()
                 print ("1")
-                obj.chatWindow()
-                print("2")
                 obj.startRecv()
+                print("2")
+                obj.chatWindow()
+
+
                 print ("3")
                 found = True
         if a == 4:
