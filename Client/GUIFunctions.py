@@ -45,7 +45,6 @@ def register(name_entry,email_entry,username_entry,password_entry, child):
     file.close()
 
 def login(username_entry,password_entry,self,new_root,my_ip,my_port):
-    from Client.GUIClassFile import GuiClass
     new_root.destroy()
 
     login_info = [line.rstrip() for line in open('users.txt')]
@@ -69,7 +68,7 @@ def login(username_entry,password_entry,self,new_root,my_ip,my_port):
         root = tk.Tk()
         root.withdraw()
         tk.messagebox.showerror("Error","Invalid username/password")
-        GuiClass.login_and_register(self)
+        return
 
     def createChatWindow(socket):
         GUIClassFile.GuiClass.chatWindow(socket)

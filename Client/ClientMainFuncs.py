@@ -12,7 +12,6 @@ class Client:
 
     def run(self):
         try:
-            print(self.client_socket)
             self.client_socket.connect((self.ip, self.port))
         except:
             tkinter.messagebox.showinfo("Error", "Wrong Ip or Port")

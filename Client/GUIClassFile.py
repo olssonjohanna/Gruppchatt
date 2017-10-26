@@ -25,7 +25,6 @@ class GuiClass:
         self.sendMessage(socket,input)
 
     def sendMessage(self,client_socket,message):
-
         client_socket.send(str.encode(message))
 
     def chatWindow(self,socket):
