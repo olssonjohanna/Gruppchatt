@@ -13,9 +13,9 @@ class ServerMain(threading.Thread):
     def registerAccount(name_entry,email_entry,username_entry,password_entry,self):
         GUIFunctions.register(name_entry, email_entry, username_entry, password_entry, self)
 
-    def __init__(self,guiObj):
+    def __init__(self,guiObj_):
         threading.Thread.__init__(self)
-        self.guiObj = guiObj
+        self.guiObj = guiObj_
         pass
 
     def run(self):
@@ -32,6 +32,7 @@ class ServerMain(threading.Thread):
         list_of_client_sockets = []
 
         sender = Server_sender(list_of_client_sockets)
+       # sender.start()
 
         while True:
             print("Waiting for connection...")

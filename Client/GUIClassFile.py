@@ -119,6 +119,7 @@ class GuiClass:
         login_button.grid(row=2, column=0)
         register_button.grid(row=2, column=1)
 
+
         new_root.mainloop()
 
     def first_page(self):

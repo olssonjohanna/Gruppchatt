@@ -11,12 +11,13 @@ class Recieve_message (threading.Thread):
 
     def run(self):
         while True:
-         # try:
-            message = self.client_socket.recv(1024).decode()
-            self.guiObj.updateChat(message)
+            #try:
+                message = self.client_socket.recv(1024).decode()
+                #print (message)
+                self.guiObj.updateChat(message)
 
 
-          #except OSError:
-          #      self.client_socket.close()
-          #      tk.messagebox.showinfo("Error", "Try Again")
-          #      return
+            #except OSError:
+             #   self.client_socket.close()
+              #  tk.messagebox.showinfo("Error", "Try Again")
+               # return

@@ -14,7 +14,7 @@ class Client:
         try:
             self.client_socket.connect((self.ip, self.port))
         except:
-            tkinter.messagebox.showinfo("Error", "Wrong Ip or Port")
+            tkinter.messagebox.showinfo("Error2", "Wrong Ip or Port")
 
     def startRecv(self):
         thread_recv = Recieve_message(self.client_socket,self.guiObj)
@@ -22,6 +22,3 @@ class Client:
 
     def chatWindow(self):
         self.guiObj.chatWindow(self.client_socket)
-
-
-

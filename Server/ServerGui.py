@@ -1,6 +1,5 @@
 import tkinter as tk
-from Server.ServerSend import Server_sender
-import threading
+
 
 
 class ServerGui():
