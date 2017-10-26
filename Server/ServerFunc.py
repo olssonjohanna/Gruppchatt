@@ -32,12 +32,11 @@ class ServerMain(threading.Thread):
         list_of_client_sockets = []
 
         sender = Server_sender(list_of_client_sockets)
-        sender.start()
 
         while True:
             print("Waiting for connection...")
             client_socket, client_addr = self.server_socket.accept()
-
+            self.guiObj.getClientSocket(client_socket, list_of_client_sockets)
             list_of_client_sockets.append(client_socket)
 
             self.reciver = Server_reciever_Handler(client_socket,list_of_client_sockets,client_addr, self.guiObj)

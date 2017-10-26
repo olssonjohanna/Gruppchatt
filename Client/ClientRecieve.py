@@ -13,7 +13,6 @@ class Recieve_message (threading.Thread):
         while True:
          # try:
             message = self.client_socket.recv(1024).decode()
-            print (message)
             self.guiObj.updateChat(message)
 
 

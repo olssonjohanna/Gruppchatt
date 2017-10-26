@@ -1,6 +1,6 @@
 import tkinter as tk
+from Server.ServerSend import Server_sender
 import threading
-import Server.ServerSend
 
 
 class ServerGui():
@@ -11,8 +11,20 @@ class ServerGui():
     def start(self):
         self.chatWindow()
 
-    def sendMessage(self, message):
+    def sendMessage(self,message):
+      #  from Server.ServerSend import Server_sender
+        var = "Admin: " + message
+        for client_socket in self.list_of_connections:
+            client_socket.send(str.encode(var))
+        self.updateServerChat(var)
+        #Server_sender.start(var)
+        #self.client_socket.send(str.encode(var))
+        #print(self.client_socket)
         pass
+
+    def getClientSocket(self,socket, lista):
+        self.client_socket = socket
+        self.list_of_connections = lista
 
     def updateServerChat(self, text):
         self.windowText.config(state=tk.NORMAL)
