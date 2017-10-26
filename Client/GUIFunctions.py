@@ -70,7 +70,7 @@ def login(username_entry,password_entry,self,new_root,my_ip,my_port):
         tk.messagebox.showerror("Error","Invalid username/password")
         GUIClassFile.GuiClass.login_and_register(self)
 
-    def createChatWindow(socket):
-        GUIClassFile.GuiClass.chatWindow(socket)
+def createChatWindow(socket):
+    GUIClassFile.GuiClass.chatWindow(socket)
 
 
