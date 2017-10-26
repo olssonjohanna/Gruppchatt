@@ -32,6 +32,7 @@ class GuiClass:
 
     def chatWindow(self,socket):
         root = tk.Tk()
+        root.title("Client")
 
         root.geometry('{}x{}'.format(600, 400))
         root.resizable(False, False)
@@ -41,13 +42,13 @@ class GuiClass:
         self.windowText = tk.Text(chatFrame,height='15',width='70')
         print ("we created window")
         self.chatText = tk.Text(textFrame,height='5',width='60')
-        sendBtn = tk.Button(textFrame,text='Send',height = '5',width=10,command = lambda: GuiClass.retrieve_input(self,socket))
+        sendBtn = tk.Button(textFrame,text='Send',height = '5',width=10,command = lambda: self.retrieve_input(socket))
 
         scrollb = tk.Scrollbar(chatFrame, command=self.windowText.yview)
         scrollb.grid(row=0, column=1, sticky='nsew')
         self.windowText['yscrollcommand'] = scrollb.set
 
-        root.bind("<Return>", lambda x: GuiClass.retrieve_input(self,socket))
+        root.bind("<Return>", lambda x: self.retrieve_input(socket))
 
         self.windowText.config(state=tk.DISABLED)
 
