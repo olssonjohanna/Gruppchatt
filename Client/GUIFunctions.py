@@ -68,7 +68,7 @@ def login(username_entry,password_entry,self,new_root,my_ip,my_port):
         root = tk.Tk()
         root.withdraw()
         tk.messagebox.showerror("Error","Invalid username/password")
-        return
+        GUIClassFile.GuiClass.login_and_register(self)
 
     def createChatWindow(socket):
         GUIClassFile.GuiClass.chatWindow(socket)

@@ -57,7 +57,7 @@ class GuiClass:
 
         root.mainloop()
 
-    def login_and_register(self, ip_send, port_send):
+    def login_and_register(self):
 
         def sub_func_register(root):
             child = tk.Toplevel(root)
@@ -105,7 +105,7 @@ class GuiClass:
         password = tk.Label(new_root, text="Password: ")
         password_entry = tk.Entry(new_root)
 
-        login_button = tk.Button(new_root, text="LOGIN", command=lambda: GUIFunctions.login(username_entry.get(), password_entry.get(), self, new_root, ip_send, port_send))
+        login_button = tk.Button(new_root, text="LOGIN", command=lambda: GUIFunctions.login(username_entry.get(), password_entry.get(), self, new_root, self.ip_send, self.port_send))
 
         register_button = tk.Button(new_root, text="REGISTER NEW USER", command=lambda: sub_func_register(new_root))
 
@@ -127,13 +127,13 @@ class GuiClass:
 
         def getValue(entry1,entry2):
          try:
-            ip_send = entry1.get()
-            port_send = int(entry2.get())
+            self.ip_send = entry1.get()
+            self.port_send = int(entry2.get())
 
-            if ip_send == ServerFunc.Ip and port_send == ServerFunc.port:
-                obj = ClientMainFuncs.Client(ip_send, port_send, self)
+            if self.ip_send == ServerFunc.Ip and self.port_send == ServerFunc.port:
+                obj = ClientMainFuncs.Client(self.ip_send, self.port_send, self)
                 obj.run()
-                self.login_and_register(ip_send, port_send)
+                self.login_and_register()
 
             else:
                 tkinter.messagebox.showinfo("Error", "Wrong Ip or Port")
