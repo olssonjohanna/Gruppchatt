@@ -23,8 +23,8 @@ class ServerMain(threading.Thread):
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
         global Ip
-
         global port
+
         self.server_socket.bind((Ip, int(port)))
 
         self.server_socket.listen()
@@ -41,6 +41,3 @@ class ServerMain(threading.Thread):
 
             self.reciver = Server_reciever_Handler(client_socket,list_of_client_sockets,client_addr, self.guiObj)
             self.reciver.start()
-            #self.reciver.sendToAllSockets()
-
- #   def startRecv(self):
