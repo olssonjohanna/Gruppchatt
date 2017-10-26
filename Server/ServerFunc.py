@@ -13,11 +13,12 @@ class ServerMain(threading.Thread):
     def registerAccount(name_entry,email_entry,username_entry,password_entry,self):
         GUIFunctions.register(name_entry, email_entry, username_entry, password_entry, self)
 
-    def __init__(self):
+    def __init__(self,guiObj):
         threading.Thread.__init__(self)
+        self.guiObj = guiObj
         pass
 
-    def start(self):
+    def run(self):
 
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -31,7 +32,7 @@ class ServerMain(threading.Thread):
         list_of_client_sockets = []
 
         sender = Server_sender(list_of_client_sockets)
-
+        sender.start()
 
         while True:
             print("Waiting for connection...")
@@ -39,8 +40,8 @@ class ServerMain(threading.Thread):
 
             list_of_client_sockets.append(client_socket)
 
-            self.reciver = Server_reciever_Handler(client_socket,list_of_client_sockets,client_addr)
+            self.reciver = Server_reciever_Handler(client_socket,list_of_client_sockets,client_addr, self.guiObj)
             self.reciver.start()
-
+            #self.reciver.sendToAllSockets()
 
  #   def startRecv(self):

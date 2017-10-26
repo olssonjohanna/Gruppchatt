@@ -16,7 +16,6 @@ class GuiClass:
         self.root.mainloop()
 
     def updateChat(self,text):
-        print ("update chatt")
         self.windowText.config(state=tk.NORMAL)
         self.windowText.insert(tk.END,text + "\n")
         self.windowText.config(state=tk.DISABLED)
@@ -40,7 +39,6 @@ class GuiClass:
         chatFrame = tk.Frame(height='250',bd = 1, width = '100',padx = 5)
         textFrame = tk.Frame(height='250',bd = 1,width='100',padx = 5)
         self.windowText = tk.Text(chatFrame,height='15',width='70')
-        print ("we created window")
         self.chatText = tk.Text(textFrame,height='5',width='60')
         sendBtn = tk.Button(textFrame,text='Send',height = '5',width=10,command = lambda: self.retrieve_input(socket))
 
@@ -60,11 +58,6 @@ class GuiClass:
         self.chatText.grid(row=0)
         sendBtn.grid(row=0,column=1)
 
-  #      _thread.start_new_thread(self.taskToNewWorker, (root,))
-
- #       time.sleep(5)
-
-#    def taskToNewWorker(self, root):
         root.mainloop()
 
     def login_and_register(self):

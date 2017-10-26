@@ -14,14 +14,19 @@ class ServerGui():
     def sendMessage(self, message):
         pass
 
-    def updateChat(self, text):
+    def updateServerChat(self, text):
         self.windowText.config(state=tk.NORMAL)
         self.windowText.insert(tk.END, text + "\n")
         self.windowText.config(state=tk.DISABLED)
         self.windowText.see(tk.END)
 
     def chatWindow(self):
+        from Server.ServerFunc import ServerMain
         root = tk.Tk()
+
+        obj = ServerMain(self)
+        obj.start()
+
         root.title("Server")
         root.geometry('{}x{}'.format(600, 400))
         root.resizable(False, False)
@@ -30,8 +35,7 @@ class ServerGui():
         textFrame = tk.Frame(height='250', bd=1, width='100', padx=5)
         self.windowText = tk.Text(chatFrame, height='15', width='70')
         self.chatText = tk.Text(textFrame, height='5', width='60')
-        sendBtn = tk.Button(textFrame, text='Send', height='5', width=10,
-                            command=lambda: self.retrieve_input())
+        sendBtn = tk.Button(textFrame, text='Send', height='5', width=10,command=lambda: self.retrieve_input())
 
         scrollb = tk.Scrollbar(chatFrame, command=self.windowText.yview)
         scrollb.grid(row=0, column=1, sticky='nsew')

@@ -18,7 +18,6 @@ class Client:
 
     def startRecv(self):
         thread_recv = Recieve_message(self.client_socket,self.guiObj)
-        print ("reviever")
         thread_recv.start()
 
     def chatWindow(self):
