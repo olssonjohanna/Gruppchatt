@@ -2,7 +2,6 @@ from Client import ClientMainFuncs, GUIClassFile
 import tkinter as tk
 import tkinter.messagebox
 
-
 def IP_and_port():
     ClientMainFuncs.Client()
 
@@ -23,31 +22,30 @@ def register(name_entry,email_entry,username_entry,password_entry, child):
 
     for i in range (len(list)):
         if i ==  email_entry:
-            messagebox.showinfo("Error", "Email already exist, try to login")
+            tk.messagebox.showinfo("Error", "Email already exist, try to login")
             child.destroy()
             return
 
         else:
-            messagebox.showinfo("Sucess", "You are now registred. Please login!")
+            tk.messagebox.showinfo("Sucess", "You are now registred. Please login!")
             child.destroy()
             return
 
     for i in range (len(list)):
         if i == username_entry:
-            messagebox.showinfo("Error", "Username already exist, pick a new one")
+            tk.messagebox.showinfo("Error", "Username already exist, pick a new one")
             username_entry.delete()
             return
 
         else:
-            messagebox.showinfo("Sucess", "You are now registred. Please login!")
+            tk.messagebox.showinfo("Sucess", "You are now registred. Please login!")
             child.destroy()
             return
 
     file.close()
 
-def login(username_entry,password_entry,self, new_root,my_ip,my_port):
+def login(username_entry,password_entry,self,new_root,my_ip,my_port):
     from Client.GUIClassFile import GuiClass
-    from Server.ServerFunc import ServerMain
     new_root.destroy()
 
     login_info = [line.rstrip() for line in open('users.txt')]
@@ -57,19 +55,10 @@ def login(username_entry,password_entry,self, new_root,my_ip,my_port):
     for i in range (len(login_info)):
         if a == 2:
             if login_info[i] == username_entry and login_info[i+1] == password_entry:
-                print("1")
-                serverObj = ServerMain()
-                print("2")
                 obj = ClientMainFuncs.Client(my_ip, my_port, self)
-                print("3")
                 obj.run()
-                print("4")
                 obj.chatWindow()
-                print("5")
-                serverObj.startRecv()
-                print("6")
                 obj.startRecv()
-                print("7")
                 found = True
         if a == 4:
             a = 0
@@ -79,7 +68,7 @@ def login(username_entry,password_entry,self, new_root,my_ip,my_port):
     if found == False:
         root = tk.Tk()
         root.withdraw()
-        messagebox.showerror("Error","Invalid username/password")
+        tk.messagebox.showerror("Error","Invalid username/password")
         GuiClass.login_and_register(self)
 
     def createChatWindow(socket):
