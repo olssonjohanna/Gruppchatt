@@ -1,6 +1,5 @@
 import threading
-import GUIClassFile
-import tkinter.messagebox
+
 
 class Recieve_message (threading.Thread):
 
@@ -12,7 +11,6 @@ class Recieve_message (threading.Thread):
 
 
     def run(self):
-        from GUIClassFile import GuiClass
         while True:
           #  try:
                 message = self.client_socket.recv(1024).decode()

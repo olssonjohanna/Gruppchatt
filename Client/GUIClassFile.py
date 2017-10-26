@@ -1,10 +1,9 @@
 import tkinter as tk
-import GUIFunctions
-import ClientMain
-import ServerFunc
-import ServerSend
-import ClientSend
 import tkinter.messagebox
+
+from Client import ClientMainFuncs, GUIFunctions
+from Server import ServerFunc
+
 
 class GuiClass:
 
@@ -81,7 +80,7 @@ class GuiClass:
             password = tk.Label(child, text="Password: ")
             password_entry = tk.Entry(child)
 
-            def getEntries(name,email,username,password, child,self):GUIFunctions.register(name.get(), email.get(),username.get(), password.get(), child,self)
+            def getEntries(name,email,username,password, child,self): GUIFunctions.register(name.get(), email.get(), username.get(), password.get(), child, self)
 
             register_button = tk.Button(child, text="REGISTER", command=lambda: getEntries(name_entry,email_entry,username_entry,password_entry, child,self))
 
@@ -110,7 +109,7 @@ class GuiClass:
         password = tk.Label(new_root, text="Password: ")
         password_entry = tk.Entry(new_root)
 
-        login_button = tk.Button(new_root, text="LOGIN", command=lambda: GUIFunctions.login(username_entry.get(),password_entry.get(), self, new_root,self.ip_send,self.port_send))
+        login_button = tk.Button(new_root, text="LOGIN", command=lambda: GUIFunctions.login(username_entry.get(), password_entry.get(), self, new_root, self.ip_send, self.port_send))
 
         register_button = tk.Button(new_root, text="REGISTER NEW USER", command=lambda: sub_func_register(new_root))
 
@@ -135,7 +134,7 @@ class GuiClass:
             self.ip_send = entry1.get()
             self.port_send = int(entry2.get())
             if self.ip_send == ServerFunc.Ip and self.port_send == ServerFunc.port:
-                obj = ClientMain.Client(self.ip_send,self.port_send,self)
+                obj = ClientMainFuncs.Client(self.ip_send, self.port_send, self)
                 obj.run()
 
                 self.login_and_register()

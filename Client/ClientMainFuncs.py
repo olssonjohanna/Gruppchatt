@@ -1,6 +1,7 @@
 import socket
-from ClientRecieve import Recieve_message
 import tkinter.messagebox
+from Client.ClientRecieve import Recieve_message
+
 class Client:
 
     def __init__(self,my_ip,my_port,guiObj):
@@ -24,7 +25,7 @@ class Client:
 
 
     def chatWindow(self):
-        import GUIClassFile
+        from Client import GUIClassFile
 
         obj = GUIClassFile.GuiClass()
         obj.chatWindow(self.client_socket)
