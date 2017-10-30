@@ -1,6 +1,6 @@
 import socket
-import tkinter.messagebox
 from Client.ClientRecieve import Recieve_message
+import tkinter.messagebox
 
 class Client:
 
@@ -11,8 +11,12 @@ class Client:
         self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     def run(self):
-        self.client_socket.connect((self.ip, self.port))
-
+        try:
+            self.client_socket.connect((self.ip, self.port))
+        except:
+            self.client_socket.close()
+            tkinter.messagebox.showerror("Error", "Try Again")
+            return False
 
     def startRecv(self):
         thread_recv = Recieve_message(self.client_socket,self.guiObj)

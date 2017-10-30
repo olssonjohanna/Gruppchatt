@@ -5,8 +5,9 @@ from Server.ServerRecieveAndHandler import Server_reciever_Handler
 from Server.ServerSend import Server_sender
 import tkinter as tk
 import threading
+import tkinter.messagebox
 
-Ip = '127.0.0.1'
+Ip = ''
 
 class ServerMain(threading.Thread):
 
@@ -44,8 +45,3 @@ class ServerMain(threading.Thread):
                 self.reciver.start()
         except:
             tk.messagebox.showerror("Port error", "Port is already in use. Try a different port.")
-
-
-            #self.reciver.sendToAllSockets()
-
- #   def startRecv(self):

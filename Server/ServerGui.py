@@ -1,6 +1,5 @@
 import tkinter as tk
-
-
+import tkinter.messagebox
 
 class ServerGui():
 
@@ -11,17 +10,14 @@ class ServerGui():
         self.chatWindow()
 
     def sendMessage(self,message):
-      #  from Server.ServerSend import Server_sender
         var = "Admin: " + message
         try:
             for client_socket in self.list_of_connections:
                 client_socket.send(str.encode(var))
+            self.updateServerChat(var)
 
-        self.updateServerChat(var)
-        #Server_sender.start(var)
-        #self.client_socket.send(str.encode(var))
-        #print(self.client_socket)
-        pass
+        except:
+            tk.messagebox.showerror("Message Error", "No client connected")
 
     def getClientSocket(self,socket, lista):
         self.client_socket = socket
@@ -34,7 +30,6 @@ class ServerGui():
         self.windowText.see(tk.END)
 
     def chatWindow(self):
-        from Server.ServerFunc import ServerMain
         root = tk.Tk()
 
         root.title("Server")

@@ -1,9 +1,6 @@
 import tkinter as tk
 import tkinter.messagebox
 from Client import ClientMainFuncs, GUIFunctions
-from Server import ServerFunc
-import _thread
-import time
 
 class GuiClass:
 
@@ -122,7 +119,6 @@ class GuiClass:
         login_button.grid(row=2, column=0)
         register_button.grid(row=2, column=1)
 
-
         new_root.mainloop()
 
     def first_page(self):
@@ -138,10 +134,11 @@ class GuiClass:
             self.port_send = int(entry2.get())
 
             obj = ClientMainFuncs.Client(self.ip_send, self.port_send, self)
-            obj.run()
-            self.login_and_register()
-
-
+            var = obj.run()
+            if var == False:
+                self.first_page()
+            else:
+                self.login_and_register()
 
          except ValueError:
              tkinter.messagebox.showinfo("Error","Port should be a number")
