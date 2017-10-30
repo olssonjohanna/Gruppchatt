@@ -25,3 +25,4 @@ class Server_reciever_Handler(threading.Thread):
         self.guiObj.updateServerChat(var)
         for sock in self.list_of_client_socktes:
             sock.send(str.encode(var))
+
