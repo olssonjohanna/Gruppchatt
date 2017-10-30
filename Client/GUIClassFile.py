@@ -79,9 +79,11 @@ class GuiClass:
             password = tk.Label(child, text="Password: ")
             password_entry = tk.Entry(child)
 
-            def getEntries(name,email,username,password, child,): GUIFunctions.register(name.get(), email.get(), username.get(), password.get(), child)
+            def getEntries(name,email,username,password, child,):
+                GUIFunctions.register(name.get(), email.get(), username.get(), password.get(), child)
 
             register_button = tk.Button(child, text="REGISTER", command=lambda: getEntries(name_entry,email_entry,username_entry,password_entry, child))
+            root.bind("<Return>", lambda x: getEntries(name_entry,email_entry,username_entry,password_entry, child))
 
             welcome_register.grid(row=0, column=0)
             name.grid(row=1, column=0)
@@ -109,6 +111,7 @@ class GuiClass:
         password_entry = tk.Entry(new_root)
 
         login_button = tk.Button(new_root, text="LOGIN", command=lambda: GUIFunctions.login(username_entry.get(), password_entry.get(), self, new_root, self.ip_send, self.port_send))
+        new_root.bind("<Return>", lambda x: GUIFunctions.login(username_entry.get(), password_entry.get(), self, new_root, self.ip_send, self.port_send))
 
         register_button = tk.Button(new_root, text="REGISTER NEW USER", command=lambda: sub_func_register(new_root))
 
@@ -134,16 +137,11 @@ class GuiClass:
             self.ip_send = entry1.get()
             self.port_send = int(entry2.get())
 
-            if self.ip_send == ServerFunc.Ip and self.port_send == ServerFunc.port:
-                obj = ClientMainFuncs.Client(self.ip_send, self.port_send, self)
-                obj.run()
-                self.login_and_register()
+            obj = ClientMainFuncs.Client(self.ip_send, self.port_send, self)
+            obj.run()
+            self.login_and_register()
 
-            else:
-                tkinter.messagebox.showinfo("Error", "Wrong Ip or Port")
-                ip_entry.delete(0,tkinter.END)
-                port_entry.delete(0, tkinter.END)
-                return
+
 
          except ValueError:
              tkinter.messagebox.showinfo("Error","Port should be a number")
@@ -151,6 +149,7 @@ class GuiClass:
              return False
 
         enter_button = tk.Button(self.root, text="ENTER", command = lambda: getValue(ip_entry,port_entry))
+        self.root.bind("<Return>", lambda x: getValue(ip_entry,port_entry))
 
         ip.grid(row=0, column=0)
         ip_entry.grid(row=0, column=1)

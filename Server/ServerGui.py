@@ -13,8 +13,10 @@ class ServerGui():
     def sendMessage(self,message):
       #  from Server.ServerSend import Server_sender
         var = "Admin: " + message
-        for client_socket in self.list_of_connections:
-            client_socket.send(str.encode(var))
+        try:
+            for client_socket in self.list_of_connections:
+                client_socket.send(str.encode(var))
+
         self.updateServerChat(var)
         #Server_sender.start(var)
         #self.client_socket.send(str.encode(var))
@@ -34,9 +36,6 @@ class ServerGui():
     def chatWindow(self):
         from Server.ServerFunc import ServerMain
         root = tk.Tk()
-
-        obj = ServerMain(self)
-        obj.start()
 
         root.title("Server")
         root.geometry('{}x{}'.format(600, 400))
