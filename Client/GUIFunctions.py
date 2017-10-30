@@ -67,7 +67,5 @@ def login(username_entry,password_entry,self,new_root,my_ip,my_port):
     if found == False:
         tk.messagebox.showerror("Error","Invalid username/password")
 
-def createChatWindow(socket):
-    GUIClassFile.GuiClass.chatWindow(socket)
 
 

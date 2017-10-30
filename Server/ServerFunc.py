@@ -2,7 +2,6 @@ import socket
 
 from Client import GUIFunctions
 from Server.ServerRecieveAndHandler import Server_reciever_Handler
-from Server.ServerSend import Server_sender
 import tkinter as tk
 import threading
 import tkinter.messagebox
@@ -33,7 +32,6 @@ class ServerMain(threading.Thread):
             self.server_socket.listen()
             list_of_client_sockets = []
 
-            sender = Server_sender(list_of_client_sockets)
 
             while True:
                 print("Waiting for connection...")

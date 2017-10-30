@@ -17,5 +17,5 @@ class Recieve_message (threading.Thread):
 
             except OSError:
                 self.client_socket.close()
-                tk.messagebox.showinfo("Error", "Try Again")
+                tk.messagebox.showerror("Error", "Server is down.")
                 return

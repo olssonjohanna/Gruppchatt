@@ -24,7 +24,10 @@ class GuiClass:
         self.sendMessage(socket,input)
 
     def sendMessage(self,client_socket,message):
-        client_socket.send(str.encode(message))
+        try:
+            client_socket.send(str.encode(message))
+        except:
+            tk.messagebox.showerror("Error","Server is down.")
 
     def chatWindow(self,socket):
         root = tk.Tk()

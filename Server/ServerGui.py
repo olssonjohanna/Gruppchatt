@@ -57,14 +57,7 @@ class ServerGui():
         textFrame.grid(padx=5, pady=20)
         self.chatText.grid(row=0)
         sendBtn.grid(row=0, column=1)
-
         root.mainloop()
-
-    def updateChat(self, text):
-        self.windowText.config(state=tk.NORMAL)
-        self.windowText.insert(tk.END, text + "\n")
-        self.windowText.config(state=tk.DISABLED)
-        self.windowText.see(tk.END)
 
     def retrieve_input(self):
         input = self.chatText.get('1.0', tk.END)
