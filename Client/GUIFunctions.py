@@ -45,7 +45,6 @@ def register(name_entry,email_entry,username_entry,password_entry, child):
     file.close()
 
 def login(username_entry,password_entry,self,new_root,my_ip,my_port):
-    new_root.destroy()
 
     login_info = [line.rstrip() for line in open('users.txt')]
     found = False
@@ -54,6 +53,7 @@ def login(username_entry,password_entry,self,new_root,my_ip,my_port):
     for i in range (len(login_info)):
         if a == 2:
             if login_info[i] == username_entry and login_info[i+1] == password_entry:
+                new_root.destroy()
                 obj = ClientMainFuncs.Client(my_ip, my_port, self)
                 obj.run()
                 obj.startRecv()
@@ -65,10 +65,7 @@ def login(username_entry,password_entry,self,new_root,my_ip,my_port):
             a = a+1
 
     if found == False:
-        root = tk.Tk()
-        root.withdraw()
         tk.messagebox.showerror("Error","Invalid username/password")
-        GUIClassFile.GuiClass.login_and_register(self)
 
 def createChatWindow(socket):
     GUIClassFile.GuiClass.chatWindow(socket)

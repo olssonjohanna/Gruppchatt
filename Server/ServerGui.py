@@ -16,12 +16,9 @@ class ServerGui():
         try:
             for client_socket in self.list_of_connections:
                 client_socket.send(str.encode(var))
-
-        self.updateServerChat(var)
-        #Server_sender.start(var)
-        #self.client_socket.send(str.encode(var))
-        #print(self.client_socket)
-        pass
+            self.updateServerChat(var)
+        except:
+            tk.messagebox.showerror("Message error", "No client connected")
 
     def getClientSocket(self,socket, lista):
         self.client_socket = socket

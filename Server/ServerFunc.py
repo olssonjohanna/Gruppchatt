@@ -6,7 +6,7 @@ from Server.ServerSend import Server_sender
 import tkinter as tk
 import threading
 
-Ip = '127.0.0.1'
+Ip = ''
 
 class ServerMain(threading.Thread):
 
